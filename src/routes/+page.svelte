@@ -42,8 +42,8 @@ const apiUrl = env.PUBLIC_API_URL;
       const response = await axios.post(`${baseUrl}/todo`, {
         title: newTodoTitle,
       });
-
-      todos = [response.data.todo[0], ...todos];
+      console.log(response);
+      todos = [response.data.todo, ...todos];
       newTodoTitle = "";
     } catch (err) {
       error = err.message;
