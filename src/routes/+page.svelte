@@ -9,6 +9,7 @@ const apiUrl = env.PUBLIC_API_URL;
   let todos = [];
   let newTodoTitle = "";
   let loading = true;
+  console.log(apiUrl);
   let baseUrl = apiUrl;
   // let baseUrl = "http://localhost:8787"; 
   let error = null;
@@ -18,7 +19,8 @@ const apiUrl = env.PUBLIC_API_URL;
   async function fetchTodos() {
     try {
       const response = await axios.get(`${baseUrl}/todos`);
-      todos = response.data;
+      todos = response.data.todos;
+
     } catch (err) {
       error = err.message;
     } finally {
@@ -37,7 +39,7 @@ const apiUrl = env.PUBLIC_API_URL;
     }
 
     try {
-      const response = await axios.post(`${baseUrl}/todos`, {
+      const response = await axios.post(`${baseUrl}/todo`, {
         title: newTodoTitle,
       });
 
@@ -51,7 +53,7 @@ const apiUrl = env.PUBLIC_API_URL;
   async function updateTodo(todo) {
     const title = editingTodoTitle.trim() || todo.title;
     try {
-      const response = await axios.put(`${baseUrl}/todos/${todo.id}`, {
+      const response = await axios.put(`${baseUrl}/todo/${todo.id}`, {
         title: title,
         completed: todo.completed, 
       });
@@ -68,7 +70,7 @@ const apiUrl = env.PUBLIC_API_URL;
 
   async function toggleTodo(todo) {
     try {
-      const response = await axios.put(`${baseUrl}/todos/${todo.id}`, {
+      const response = await axios.put(`${baseUrl}/todo/${todo.id}`, {
         title: todo.title,
         completed: !todo.completed,
       });
