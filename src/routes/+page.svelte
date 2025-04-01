@@ -1,13 +1,13 @@
 <script>
   import axios from "axios";
   import { onMount } from "svelte";
-  import { URL } from '$env/static/private';
+  import { PUBLIC_API_URL } from '$env/static/public';
 
 
   let todos = [];
   let newTodoTitle = "";
   let loading = true;
-  let baseUrl = URL;
+  let baseUrl = PUBLIC_API_URL;
   // let baseUrl = "http://localhost:8787"; 
   let error = null;
   let editingTodoId = null;
